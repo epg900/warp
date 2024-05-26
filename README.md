@@ -1,6 +1,6 @@
 # Warp on Warp
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/epg900/warp/blob/main/warp.ipynb))
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/epg900/warp/blob/main/warp.ipynb)
 
 [This Config file](WoW/WarpOnWarp-HiddifyNext.json) can be used directly in the [Hiddify Next](https://github.com/hiddify/hiddify-next/releases) App. But it is better to make your personal warp config to have better speed and lower delay.
 

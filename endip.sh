@@ -42,7 +42,7 @@ cfwarpIP(){
 if [[ ! -f "warpendpoint" ]]; then
 echo "Download warp preferred program"
 if [[ -n $cpu ]]; then
-#curl -L -o warpendpoint -# --retry 2 https://gitlab.com/rwkgyg/CFwarp/raw/main/point/$cpu
+curl -L -o warpendpoint -# --retry 2 https://gitlab.com/rwkgyg/CFwarp/raw/main/point/$cpu
 fi
 fi
 }
@@ -197,6 +197,11 @@ rm -rf ip.txt warpendpoint
 exit
 }
 
+if [ $1 == "ip4" ]; then 
+cfwarpIP && endipv4 && endipresult
+fi
+
+if [ $1 == "-i" ]; then 
 echo "------------------------------------------------------"
 echo "Supports WARP preferred peer IP and WARP configuration file generation"
 echo "------------------------------------------------------"
@@ -211,4 +216,5 @@ elif [ "$menu" == "2" ];then
 cfwarpreg
 else 
 exit
+fi
 fi

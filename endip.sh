@@ -1,4 +1,5 @@
 #!/bin/bash
+#curl -L -o warpendpoint -# --retry 2 https://gitlab.com/rwkgyg/CFwarp/raw/main/point/$cpu
 export LANG=en_US.UTF-8
 case "$(uname -m)" in
 	x86_64 | x64 | amd64 )
@@ -14,7 +15,7 @@ case "$(uname -m)" in
         cpu=arm
 	;;
 	* )
-	echo "当前架构为$(uname -m)，暂不支持"
+	echo "The current architecture is $(uname -m), which is not supported yet."
 	exit
 	;;
 esac
@@ -24,10 +25,10 @@ curl -sSL https://gitlab.com/rwkgyg/CFwarp/-/raw/main/point/acwarp.sh -o acwarp.
 }
 
 warpendipv4v6(){
-echo "1.IPV4优选对端IP"
-echo "2.IPV6优选对端IP"
-echo "0.退出"
-read -p "请选择: " menu
+echo "1.IPV4 preferred peer IP"
+echo "2.IPV6 preferred peer IP"
+echo "0.Exit"
+read -p "please choose:" menu
 if [ "$menu" == "1" ];then
 cfwarpIP && endipv4 && endipresult
 elif [ "$menu" == "2" ];then
@@ -39,9 +40,9 @@ fi
 
 cfwarpIP(){
 if [[ ! -f "warpendpoint" ]]; then
-echo "下载warp优选程序"
+echo "Download warp preferred program"
 if [[ -n $cpu ]]; then
-curl -L -o warpendpoint -# --retry 2 https://gitlab.com/rwkgyg/CFwarp/raw/main/point/$cpu
+#curl -L -o warpendpoint -# --retry 2 https://gitlab.com/rwkgyg/CFwarp/raw/main/point/$cpu
 fi
 fi
 }
@@ -191,23 +192,19 @@ ulimit -n 102400
 chmod +x warpendpoint
 ./warpendpoint
 clear
-cat result.csv | awk -F, '$3!="timeout ms" {print} ' | sort -t, -nk2 -nk3 | uniq | head -11 | awk -F, '{print "端点 "$1" 丢包率 "$2" 平均延迟 "$3}' 
+cat result.csv | awk -F, '$3!="timeout ms" {print} ' | sort -t, -nk2 -nk3 | uniq | head -11 | awk -F, '{print "Endpoint "$1" Packet Loss Rate "$2" Average Delay "$3}' 
 rm -rf ip.txt warpendpoint
 exit
 }
 
 echo "------------------------------------------------------"
-echo "甬哥Github项目  ：github.com/yonggekkk"
-echo "甬哥blogger博客 ：ygkkk.blogspot.com"
-echo "甬哥YouTube频道 ：www.youtube.com/@ygkkk"
-echo 
-echo "支持WARP优选对端IP、WARP配置文件生成"
+echo "Supports WARP preferred peer IP and WARP configuration file generation"
 echo "------------------------------------------------------"
 echo
-echo "1.WARP-V4V6优选对端IP"
-echo "2.注册生成WARP-Wireguard配置文件、二维码"
-echo "0.退出"
-read -p "请选择: " menu
+echo "1.WARP-V4V6 preferred peer IP"
+echo "2. Register to generate WARP-Wireguard configuration file and QR code"
+echo "0.exit"
+read -p "please choose: " menu
 if [ "$menu" == "1" ];then
 warpendipv4v6
 elif [ "$menu" == "2" ];then
